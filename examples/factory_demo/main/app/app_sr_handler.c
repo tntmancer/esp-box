@@ -275,6 +275,29 @@ void sr_handler_task(void *pvParam)
                 ui_sensor_set_ac_poweroff();
                 break;
 
+            // Capstone commands
+            case SR_CMD_ON:
+                ESP_LOGI(TAG, "ON");
+                break;
+            case SR_CMD_OFF:
+                ESP_LOGI(TAG, "OFF");
+                break;
+            case SR_CMD_HARDER:
+                ESP_LOGI(TAG, "HARDER");
+                break;
+            case SR_CMD_SOFTER:
+                ESP_LOGI(TAG, "SOFTER");
+                break;
+            case SR_CMD_THIGH:
+                ESP_LOGI(TAG, "THIGH");
+                break;
+            case SR_CMD_UPPER_BACK:
+                ESP_LOGI(TAG, "UPPER BACK");
+                break;
+            case SR_CMD_LOWER_BACK:
+                ESP_LOGI(TAG, "LOWER BACK");
+                break;
+
             default:
                 ESP_LOGE(TAG, "Unknow cmd");
                 break;

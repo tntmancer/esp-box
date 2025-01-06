@@ -88,6 +88,15 @@ static const sr_cmd_t g_default_cmd_info[] = {
     {SR_CMD_AC_ON, SR_LANG_EN, 0, "Turn on the Air", "TkN nN jc fR", {NULL}},
     {SR_CMD_AC_OFF, SR_LANG_EN, 0, "Turn off the Air", "TkN eF jc fR", {NULL}},
 
+    // Capstone Commands (may need to lengthen the on/off commands)
+    {SR_CMD_ON, SR_LANG_EN, 0, "On", "nN", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Off", "eF", {NULL}},
+    {SR_CMD_HARDER, SR_LANG_EN, 0, "Harder", "hnRDk", {NULL}},
+    {SR_CMD_SOFTER, SR_LANG_EN, 0, "Softer", "SnFTk", {NULL}},
+    {SR_CMD_THIGH, SR_LANG_EN, 0, "Thigh", "vi", {NULL}},
+    {SR_CMD_UPPER_BACK, SR_LANG_EN, 0, "Upper Back", "cPk BaK", {NULL}},
+    {SR_CMD_LOWER_BACK, SR_LANG_EN, 0, "Lower Back", "Lbk BaK", {NULL}},
+
     // Chinese
     {SR_CMD_LIGHT_ON, SR_LANG_CN, 0, "打开电灯", "da kai dian deng", {NULL}},
     {SR_CMD_LIGHT_OFF, SR_LANG_CN, 0, "关闭电灯", "guan bi dian deng", {NULL}},

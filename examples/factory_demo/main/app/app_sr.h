@@ -53,6 +53,14 @@ typedef enum {
     SR_CMD_AC_ON,
     SR_CMD_AC_OFF,
     SR_CMD_MAX,
+    // May need to change the verbiage to "arm off" but others will be removed after testing
+    SR_CMD_OFF,
+    SR_CMD_ON,
+    SR_CMD_HARDER,
+    SR_CMD_SOFTER,
+    SR_CMD_THIGH,
+    SR_CMD_UPPER_BACK,
+    SR_CMD_LOWER_BACK,
 } sr_user_cmd_t;
 
 typedef enum {
