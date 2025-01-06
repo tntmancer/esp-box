@@ -215,69 +215,10 @@ void sr_handler_task(void *pvParam)
 #endif
 
             switch (cmd->cmd) {
-            case SR_CMD_SET_RED:
-                app_pwm_led_set_all(128, 0, 0);
-                break;
-            case SR_CMD_SET_GREEN:
-                app_pwm_led_set_all(0, 128, 0);
-                break;
-            case SR_CMD_SET_BLUE:
-                app_pwm_led_set_all(0, 0, 128);
-                break;
-            case SR_CMD_LIGHT_ON:
-                app_pwm_led_set_power(1);
-                break;
-            case SR_CMD_LIGHT_OFF:
-                app_pwm_led_set_power(0);
-                break;
-            case SR_CMD_CUSTOMIZE_COLOR: {
-                uint16_t h;
-                uint8_t s, v;
-                app_pwm_led_get_customize_color(&h, &s, &v);
-                app_pwm_led_set_all_hsv(h, s, v);
-            } break;
-            case SR_CMD_NEXT:
-                file_iterator_next(file_iterator);
-                file_iterator_get_full_path_from_index(file_iterator, file_iterator_get_index(file_iterator), filename, sizeof(filename));
-                fp = fopen(filename, "rb");
-                if (!fp) {
-                    ESP_LOGE(TAG, "unable to open '%s'", filename);
-                } else {
-                    audio_player_play(fp);
-                }
-                last_player_state = AUDIO_PLAYER_STATE_PLAYING;
-                break;
-            case SR_CMD_PLAY:
-                ESP_LOGD(TAG, "SR_CMD_PLAY:%d, last_player_state:%d", audio_player_get_state(), last_player_state);
-                if (AUDIO_PLAYER_STATE_IDLE == audio_player_get_state()) {
-                    file_iterator_get_full_path_from_index(file_iterator, file_iterator_get_index(file_iterator), filename, sizeof(filename));
-                    fp = fopen(filename, "rb");
-                    if (!fp) {
-                        ESP_LOGE(TAG, "unable to open '%s'", filename);
-                    } else {
-                        audio_player_play(fp);
-                    }
-                } else if (AUDIO_PLAYER_STATE_PAUSE == audio_player_get_state()) {
-                    audio_player_resume();
-                }
-                last_player_state = AUDIO_PLAYER_STATE_PLAYING;
-                break;
-            case SR_CMD_PAUSE:
-                audio_player_pause();
-                last_player_state = AUDIO_PLAYER_STATE_PAUSE;
-                break;
-
-            case SR_CMD_AC_ON:
-                ui_sensor_set_ac_poweron();
-                break;
-
-            case SR_CMD_AC_OFF:
-                ui_sensor_set_ac_poweroff();
-                break;
-
             // Capstone commands
             case SR_CMD_ON:
                 ESP_LOGI(TAG, "ON");
+                // app_pwm_led_set_power(1);
                 break;
             case SR_CMD_OFF:
                 ESP_LOGI(TAG, "OFF");

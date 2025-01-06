@@ -71,23 +71,6 @@ static sr_data_t *g_sr_data = NULL;
  * @brief all default commands
  */
 static const sr_cmd_t g_default_cmd_info[] = {
-    // English
-    {SR_CMD_LIGHT_ON, SR_LANG_EN, 0, "Turn On the Light", "TkN nN jc LiT", {NULL}},
-    {SR_CMD_LIGHT_ON, SR_LANG_EN, 0, "Switch On the Light", "SWgp nN jc LiT", {NULL}},
-    {SR_CMD_LIGHT_OFF, SR_LANG_EN, 0, "Switch Off the Light", "SWgp eF jc LiT", {NULL}},
-    {SR_CMD_LIGHT_OFF, SR_LANG_EN, 0, "Turn Off the Light", "TkN eF jc LiT", {NULL}},
-    {SR_CMD_SET_RED, SR_LANG_EN, 0, "Turn Red", "TkN RfD", {NULL}},
-    {SR_CMD_SET_GREEN, SR_LANG_EN, 0, "Turn Green", "TkN GRmN", {NULL}},
-    {SR_CMD_SET_BLUE, SR_LANG_EN, 0, "Turn Blue", "TkN BLo", {NULL}},
-    {SR_CMD_CUSTOMIZE_COLOR, SR_LANG_EN, 0, "Customize Color", "KcSTcMiZ KcLk", {NULL}},
-    {SR_CMD_PLAY, SR_LANG_EN, 0, "Sing a song", "Sgl c Sel", {NULL}},
-    {SR_CMD_PLAY, SR_LANG_EN, 0, "Play Music", "PLd MYoZgK", {NULL}},
-    {SR_CMD_NEXT, SR_LANG_EN, 0, "Next Song", "NfKST Sel", {NULL}},
-    {SR_CMD_PAUSE, SR_LANG_EN, 0, "Pause Playing", "PeZ PLdgl", {NULL}},
-
-    {SR_CMD_AC_ON, SR_LANG_EN, 0, "Turn on the Air", "TkN nN jc fR", {NULL}},
-    {SR_CMD_AC_OFF, SR_LANG_EN, 0, "Turn off the Air", "TkN eF jc fR", {NULL}},
-
     // Capstone Commands (may need to lengthen the on/off commands)
     {SR_CMD_ON, SR_LANG_EN, 0, "On", "nN", {NULL}},
     {SR_CMD_OFF, SR_LANG_EN, 0, "Off", "eF", {NULL}},
@@ -96,31 +79,6 @@ static const sr_cmd_t g_default_cmd_info[] = {
     {SR_CMD_THIGH, SR_LANG_EN, 0, "Thigh", "vi", {NULL}},
     {SR_CMD_UPPER_BACK, SR_LANG_EN, 0, "Upper Back", "cPk BaK", {NULL}},
     {SR_CMD_LOWER_BACK, SR_LANG_EN, 0, "Lower Back", "Lbk BaK", {NULL}},
-
-    // Chinese
-    {SR_CMD_LIGHT_ON, SR_LANG_CN, 0, "打开电灯", "da kai dian deng", {NULL}},
-    {SR_CMD_LIGHT_OFF, SR_LANG_CN, 0, "关闭电灯", "guan bi dian deng", {NULL}},
-    {SR_CMD_SET_RED, SR_LANG_CN, 0, "调成红色", "tiao cheng hong se", {NULL}},
-    {SR_CMD_SET_GREEN, SR_LANG_CN, 0, "调成绿色", "tiao cheng lv se", {NULL}},
-    {SR_CMD_SET_BLUE, SR_LANG_CN, 0, "调成蓝色", "tiao cheng lan se", {NULL}},
-    {SR_CMD_CUSTOMIZE_COLOR, SR_LANG_CN, 0, "自定义颜色", "zi ding yi yan se", {NULL}},
-    {SR_CMD_PLAY, SR_LANG_CN, 0, "播放音乐", "bo fang yin yue", {NULL}},
-    {SR_CMD_NEXT, SR_LANG_CN, 0, "切歌", "qie ge", {NULL}},
-    {SR_CMD_NEXT, SR_LANG_CN, 0, "下一曲", "xia yi qu", {NULL}},
-    {SR_CMD_PAUSE, SR_LANG_CN, 0, "暂停", "zan ting", {NULL}},
-    {SR_CMD_PAUSE, SR_LANG_CN, 0, "暂停播放", "zan ting bo fang", {NULL}},
-    {SR_CMD_PAUSE, SR_LANG_CN, 0, "停止播放", "ting zhi bo fang", {NULL}},
-
-    {SR_CMD_AC_ON, SR_LANG_CN, 0, "打开空调", "da kai kong tiao", {NULL}},
-    {SR_CMD_AC_OFF, SR_LANG_CN, 0, "关闭空调", "guan bi kong tiao", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "舒适模式", "shu shi mo shi", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "制冷模式", "zhi leng mo shi", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "制热模式", "zhi re mo shi", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "加热模式", "jia re mo shi", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "除湿模式", "chu shi mo shi", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "送风模式", "song feng mo shi", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "升高温度", "sheng gao wen du", {NULL}},
-    {SR_CMD_MAX, SR_LANG_CN, 0, "降低温度", "jiang di wen du", {NULL}},
 };
 
 static void audio_feed_task(void *arg)

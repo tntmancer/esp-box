@@ -9,7 +9,7 @@
 #include "bsp_board.h"
 #include "lvgl.h"
 #include "app_wifi.h"
-#include "app_rmaker.h"
+// #include "app_rmaker.h"
 #include "ui_main.h"
 #include "ui_net_config.h"
 

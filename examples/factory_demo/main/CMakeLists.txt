@@ -7,13 +7,11 @@ idf_component_register(
         "gui"
         "gui/font"
         "gui/image"
-        "rmaker"
 
     INCLUDE_DIRS
         "."
         "gui"
-        "app"
-        "rmaker")
+        "app")
 
 target_compile_options(${COMPONENT_LIB} PRIVATE "-Wno-format" "-Wno-deprecated-declarations")
 

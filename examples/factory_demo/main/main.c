@@ -17,7 +17,7 @@
 #include "bsp_storage.h"
 #include "settings.h"
 #include "app_led.h"
-#include "app_rmaker.h"
+// #include "app_rmaker.h"
 #include "app_sr.h"
 #include "audio_player.h"
 #include "file_iterator.h"
@@ -145,5 +145,5 @@ void app_main(void)
     ESP_LOGI(TAG, "speech recognition start");
     vTaskDelay(pdMS_TO_TICKS(4 * 1000));
     app_sr_start(false);
-    app_rmaker_start();
+    // app_rmaker_start();
 }
