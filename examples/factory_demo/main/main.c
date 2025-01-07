@@ -21,8 +21,9 @@
 #include "app_sr.h"
 #include "audio_player.h"
 #include "file_iterator.h"
-#include "gui/ui_main.h"
+// #include "gui/ui_main.h"
 #include "ui_sensor_monitor.h"
+#include "gui/ui_buttons.h"
 
 #include "bsp_board.h"
 #include "bsp/esp-bsp.h"
@@ -121,7 +122,8 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Display LVGL demo");
     sensor_task_state_event_init();
-    ESP_ERROR_CHECK(ui_main_start());
+    // ESP_ERROR_CHECK(ui_main_start());
+    ESP_ERROR_CHECK(ui_buttons_start());
 
     vTaskDelay(pdMS_TO_TICKS(500));
     bsp_display_backlight_on();
