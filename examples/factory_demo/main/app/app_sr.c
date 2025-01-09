@@ -73,7 +73,16 @@ static sr_data_t *g_sr_data = NULL;
 static const sr_cmd_t g_default_cmd_info[] = {
     // Capstone Commands (may need to lengthen the on/off commands)
     {SR_CMD_ON, SR_LANG_EN, 0, "On", "nN", {NULL}},
+    {SR_CMD_ON, SR_LANG_EN, 0, "Start", "STnRT", {NULL}},
+    {SR_CMD_ON, SR_LANG_EN, 0, "Go", "Gb", {NULL}},
     {SR_CMD_OFF, SR_LANG_EN, 0, "Off", "eF", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Ouch", "tp", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Oof", "oF", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Ow", "b", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Stop", "STnP", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Hurt", "hkT", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Damn", "DaM", {NULL}},
+    {SR_CMD_OFF, SR_LANG_EN, 0, "Fuck", "FcK", {NULL}},
     {SR_CMD_HARDER, SR_LANG_EN, 0, "Harder", "hnRDk", {NULL}},
     {SR_CMD_SOFTER, SR_LANG_EN, 0, "Softer", "SnFTk", {NULL}},
     {SR_CMD_THIGH, SR_LANG_EN, 0, "Thigh", "vi", {NULL}},

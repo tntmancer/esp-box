@@ -23,7 +23,8 @@
 
 static const char *TAG = "ui_buttons";
 
-LV_FONT_DECLARE(font_icon_16);
+LV_FONT_DECLARE(lv_font_montserrat_14);
+LV_FONT_DECLARE(lv_font_montserrat_24)
 
 static int g_item_index = 0;
 static lv_group_t *g_btn_op_group = NULL;
@@ -127,10 +128,10 @@ static void ui_button_event_cb(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t *btn = lv_event_get_target(e);
-    int id = (int)lv_event_get_user_data(e);
+    const char *str = (const char *)lv_event_get_user_data(e);
 
     if (code == LV_EVENT_CLICKED) {
-        ESP_LOGI(TAG, "Button %d clicked", id);
+        ESP_LOGI(TAG, "Button clicked: %s", str);
     }
 }
 
@@ -138,19 +139,118 @@ static void ui_main_menu(int32_t index_id)
 {
     lv_obj_t *btn;
     lv_obj_t *label;
-    char buf[16];
+    lv_obj_t *label2;
 
-    for (int i = 0; i < 6; i++) {
-        btn = lv_btn_create(lv_scr_act());
-        lv_obj_set_size(btn, 100, 50);
-        lv_obj_align(btn, LV_ALIGN_CENTER, (i % 3) * 110 - 110, (i / 3) * 60 - 30);
-        lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)i);
+    // Harder button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 70, 100); // Increase the button size to fit both text and arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, -110, -50);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"HARDER");
+    // Create the label
+    // Create first label with arrow
+    label = lv_label_create(btn);
+    lv_label_set_text(label, LV_SYMBOL_UP);
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, -20); // Position at top
 
-        label = lv_label_create(btn);
-        snprintf(buf, sizeof(buf), "Button %d", i + 1);
-        lv_label_set_text(label, buf);
-        lv_obj_center(label);
-    }
+    // Create second label with text
+    label2 = lv_label_create(btn);
+    lv_label_set_text(label2, "Harder");
+    lv_obj_set_style_text_font(label2, &lv_font_montserrat_16, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(label2, lv_color_black(), LV_STATE_DEFAULT);
+    lv_obj_align(label2, LV_ALIGN_CENTER, 0, 20); // Position at bottom
+    lv_obj_add_style(btn, &g_btn_styles.style, 0);
+    lv_obj_add_style(btn, &g_btn_styles.style_pr, LV_STATE_PRESSED);
+
+    // Softer button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 70, 100); // Increase the button size to fit both text and arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, -110, 60);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"SOFTER");
+    // Create first label with arrow
+    label = lv_label_create(btn);
+    lv_label_set_text(label, LV_SYMBOL_DOWN);
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 20); // Position at bottom
+
+    // Create second label with text
+    label2 = lv_label_create(btn);
+    lv_label_set_text(label2, "Softer");
+    lv_obj_set_style_text_font(label2, &lv_font_montserrat_16, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(label2, lv_color_black(), LV_STATE_DEFAULT);
+    lv_obj_align(label2, LV_ALIGN_CENTER, 0, -20); // Position at top
+    lv_obj_add_style(btn, &g_btn_styles.style, 0);
+    lv_obj_add_style(btn, &g_btn_styles.style_pr, LV_STATE_PRESSED);
+    lv_obj_add_style(btn, &g_btn_styles.style, 0);
+    lv_obj_add_style(btn, &g_btn_styles.style_pr, LV_STATE_PRESSED);
+
+    // On button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 100, 100); 
+    lv_obj_align(btn, LV_ALIGN_CENTER, 0, -50);
+    lv_obj_set_style_bg_color(btn, lv_color_make(0, 255, 0), LV_STATE_DEFAULT);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"ON");
+    // Create the label
+    label = lv_label_create(btn);
+    lv_label_set_text(label, "Start");
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT); // Increased font size to 24
+    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+
+    // These two will be larger and in the center
+    // Off button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 100, 100); 
+    lv_obj_align(btn, LV_ALIGN_CENTER, 0, 60);
+    lv_obj_set_style_bg_color(btn, lv_color_make(255, 0, 0), LV_STATE_DEFAULT);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"OFF");
+    // Create the label
+    label = lv_label_create(btn);
+    lv_label_set_text(label, "Stop");
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT); // Increased font size to 24
+    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+
+    // These 4 four will be smaller and to the right. One will be left unimplemented for now
+    // Thigh button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 70, 45); // Increase the button size to fit both text and arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 110, -75);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"THIGH");
+    // Create the label
+    label = lv_label_create(btn);
+    lv_label_set_text(label, "Thigh");
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_16, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT); // Set text color to black
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Adjust the label position
+
+    // Upper Back button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 70, 45); // Increase the button size to fit both text and arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 110, -20);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"UPPER BACK");
+    // Create the label
+    label = lv_label_create(btn);
+    lv_label_set_text(label, "Upper\nBack");
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_16, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT); // Set text color to black
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Adjust the label position
+
+    // Lower Back button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 70, 45); // Increase the button size to fit both text and arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 110, 40);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"LOWER BACK");
+    // Create the label
+    label = lv_label_create(btn);
+    lv_label_set_text(label, "Lower\nBack");
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_16, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT); // Set text color to black
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Adjust the label position
+
+    
 }
 
 static void ui_after_boot(void)
