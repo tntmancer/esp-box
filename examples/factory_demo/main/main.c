@@ -17,6 +17,7 @@
 #include "bsp_storage.h"
 #include "settings.h"
 #include "app_led.h"
+#include "app_estop.h"
 // #include "app_rmaker.h"
 #include "app_sr.h"
 #include "audio_player.h"
@@ -143,9 +144,13 @@ void app_main(void)
 #else
     app_pwm_led_init(brd->PMOD2->row1[1], brd->PMOD2->row1[2], brd->PMOD2->row1[3]);
 #endif
-
+    // Initialize the e-stop button
+    app_estop_init();
     ESP_LOGI(TAG, "speech recognition start");
     vTaskDelay(pdMS_TO_TICKS(4 * 1000));
+    // Start the e-stop monitor
+    ESP_ERROR_CHECK(app_estop_start_monitor());
+    // Start the speech recognition
     app_sr_start(false);
     // app_rmaker_start();
 }
