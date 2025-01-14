@@ -207,6 +207,11 @@ void sr_anim_stop(void)
     lv_event_send(g_sr_mask, LV_EVENT_VALUE_CHANGED, (void *) false);
 }
 
+bool sr_anim_active(void)
+{
+    return g_sr_anim_active;
+}
+
 void sr_anim_set_text(char *text)
 {
     ui_acquire();

@@ -38,6 +38,8 @@ void sr_anim_stop(void);
  */
 void sr_anim_set_text(char *text);
 
+bool sr_anim_active(void);
+
 #ifdef __cplusplus
 }
 #endif

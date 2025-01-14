@@ -35,6 +35,7 @@
 #include "ui_sensor_monitor.h"
 #include "ui_volume.h"
 #include "ui_main.h"
+#include "ui_sr.h"
 
 static const char *TAG = "app_sr";
 
@@ -137,7 +138,7 @@ static void audio_feed_task(void *arg)
             sum += audio_buffer[i] * audio_buffer[i];
         }
         float rms = sqrt(sum / (audio_chunksize * I2S_CHANNEL_NUM));
-        if (rms > THRESHOLD && !volume_active()) {
+        if (rms > THRESHOLD && !volume_active() && !sr_anim_active()) {
             // If the volume is too loud, shut off the machine
             // ESP_LOGI(TAG, "Volume too loud: %f", rms);
             ESP_LOGI(TAG, "OFF");

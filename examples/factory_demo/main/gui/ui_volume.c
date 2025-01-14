@@ -66,7 +66,7 @@ void ui_volume_init(void)
     lv_obj_align(g_vol_label, LV_ALIGN_CENTER, 0, 0);
 
     g_vol_active = false;
-    vol_timer = lv_timer_create(ui_vol_cb, 1000, NULL);
+    vol_timer = lv_timer_create(ui_vol_cb, 2000, NULL);
     lv_timer_pause(vol_timer);
 }
 
