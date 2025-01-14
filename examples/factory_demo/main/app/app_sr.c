@@ -33,6 +33,8 @@
 #include "settings.h"
 #include "ui_mute.h"
 #include "ui_sensor_monitor.h"
+#include "ui_volume.h"
+#include "ui_main.h"
 
 static const char *TAG = "app_sr";
 
@@ -128,6 +130,20 @@ static void audio_feed_task(void *arg)
 
         /* Read audio data from I2S bus */
         bsp_i2s_read((char *)audio_buffer, audio_chunksize * I2S_CHANNEL_NUM * sizeof(int16_t), &bytes_read, portMAX_DELAY);
+
+        /* If the volume is too loud, print a message */
+        int64_t sum = 0;
+        for (int i = 0; i < audio_chunksize * I2S_CHANNEL_NUM; i++) {
+            sum += audio_buffer[i] * audio_buffer[i];
+        }
+        float rms = sqrt(sum / (audio_chunksize * I2S_CHANNEL_NUM));
+        if (rms > THRESHOLD && !volume_active()) {
+            // If the volume is too loud, shut off the machine
+            // ESP_LOGI(TAG, "Volume too loud: %f", rms);
+            ESP_LOGI(TAG, "OFF");
+            // turn the screen red for a second
+            volume_start();   
+        }
 
         /* Save audio data to file if record enabled */
         if (g_sr_data->b_record_en && (NULL != g_sr_data->fp)) {

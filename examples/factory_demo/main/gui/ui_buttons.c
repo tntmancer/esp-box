@@ -20,6 +20,7 @@
 #include "ui_sr.h"
 #include "ui_boot_animate.h"
 #include "ui_hint.h"
+#include "ui_volume.h"
 
 static const char *TAG = "ui_buttons";
 
@@ -250,7 +251,6 @@ static void ui_main_menu(int32_t index_id)
     lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT); // Set text color to black
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Adjust the label position
 
-    
 }
 
 static void ui_after_boot(void)
@@ -295,6 +295,9 @@ esp_err_t ui_buttons_start(void)
 
     /* For speech animation */
     ui_sr_anim_init();
+
+    /* For Volume Detection */
+    ui_volume_init();
 
     boot_animate_start(ui_after_boot);
     ui_release();
