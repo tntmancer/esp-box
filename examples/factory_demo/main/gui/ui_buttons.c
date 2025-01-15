@@ -21,6 +21,7 @@
 #include "ui_boot_animate.h"
 #include "ui_hint.h"
 #include "ui_volume.h"
+#include "ui_estop.h"
 
 static const char *TAG = "ui_buttons";
 
@@ -298,6 +299,9 @@ esp_err_t ui_buttons_start(void)
 
     /* For Volume Detection */
     ui_volume_init();
+
+    /* For Emergency Stop */
+    ui_estop_init();
 
     boot_animate_start(ui_after_boot);
     ui_release();

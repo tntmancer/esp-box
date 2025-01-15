@@ -8,6 +8,7 @@
 #include "app_estop.h"
 #include "bsp_board.h"
 #include "driver/gpio.h"
+#include "ui_estop.h"
 
 static const char *TAG = "app_estop";
 static TaskHandle_t estop_task_handle = NULL;
@@ -30,7 +31,6 @@ esp_err_t app_estop_init(void)
         ESP_LOGE(TAG, "gpio_config failed, ret_val=%d", ret_val);
         return ret_val;
     }
-
     return ret_val;
 }
 
@@ -45,6 +45,7 @@ void app_estop_monitor_task(void *pvParameters) {
     while (true) {
         if (app_estop_get_state() == 0) {
             ESP_LOGI(TAG, "OFF");
+            ui_estop_start();
         }
         vTaskDelay(pdMS_TO_TICKS(100));
     }
