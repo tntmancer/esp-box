@@ -11,6 +11,7 @@
 #include "settings.h"
 #include "ui_buttons.h"
 #include "ui_main.h"
+#include "ui_volume.h"
 
 static bool g_vol_active = false;
 static lv_obj_t *g_vol_label = NULL;
@@ -18,29 +19,84 @@ static lv_obj_t *g_vol_mask = NULL;
 lv_timer_t *vol_timer;
 
 static void ui_vol_cb(lv_timer_t *timer) {
-    // If hidden, show the volume mask
-    if (lv_obj_has_flag(g_vol_mask, LV_OBJ_FLAG_HIDDEN)) {
-        lv_obj_clear_flag(g_vol_mask, LV_OBJ_FLAG_HIDDEN);
-        lv_obj_move_foreground(g_vol_mask);
-    }
-    // If active, hide the volume mask
-    else {
-        lv_obj_add_flag(g_vol_mask, LV_OBJ_FLAG_HIDDEN);
-        lv_timer_pause(vol_timer);
-        g_vol_active = false;
+    if (g_vol_active) {
+        volume_stop();  // This will trigger the event handler with active=false
     }
 }
 
+// static void vol_mask_event_handler(lv_event_t *event) {
+//     bool active = (bool) event->param;
+//     lv_indev_t *indev = lv_indev_get_next(NULL);
+
+//     if (active) {
+//         // Show mask first
+//         lv_obj_clear_flag(g_vol_mask, LV_OBJ_FLAG_HIDDEN);
+//         lv_obj_move_foreground(g_vol_mask);
+        
+//         // Disable input
+//         lv_indev_enable(indev, false);
+        
+//         // Update state and start timer
+//         g_vol_active = true;
+//         lv_timer_resume(vol_timer);
+//     } else {
+//         // Re-enable input first
+//         lv_indev_enable(indev, true);
+        
+//         // Hide mask
+//         lv_obj_add_flag(g_vol_mask, LV_OBJ_FLAG_HIDDEN);
+        
+//         // Update state last
+//         g_vol_active = false;
+//         lv_timer_pause(vol_timer);
+//     }
+// }
 static void vol_mask_event_handler(lv_event_t *event) {
     bool active = (bool) event->param;
+    
+    // Prevent re-entry if already in desired state
+    if (active == g_vol_active) {
+        return;
+    }
+
+    lv_indev_t *indev = lv_indev_get_next(NULL);
+
     if (active) {
-        lv_indev_t *indev = lv_indev_get_next(NULL);
-        lv_indev_enable(indev, false);
+        // Set state first
         g_vol_active = true;
+        
+        // Show mask and move to front
+        lv_obj_clear_flag(g_vol_mask, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_move_foreground(g_vol_mask);
+        
+        // Force immediate screen update
+        lv_refr_now(NULL);
+        
+        // Disable input devices
+        while (indev) {
+            lv_indev_enable(indev, false);
+            indev = lv_indev_get_next(indev);
+        }
+        
+        // Start timer
+        lv_timer_reset(vol_timer);
         lv_timer_resume(vol_timer);
     } else {
-        lv_indev_t *indev = lv_indev_get_next(NULL);
-        lv_indev_enable(indev, true);
+        // Enable input devices first
+        while (indev) {
+            lv_indev_enable(indev, true);
+            lv_indev_reset(indev, lv_disp_get_default());
+            indev = lv_indev_get_next(indev);
+        }
+        
+        // Hide mask and move to background
+        lv_obj_add_flag(g_vol_mask, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_move_background(g_vol_mask);
+        
+        // Force screen update
+        lv_refr_now(NULL);
+        
+        // Update state and stop timer last
         g_vol_active = false;
         lv_timer_pause(vol_timer);
     }

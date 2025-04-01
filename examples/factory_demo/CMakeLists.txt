@@ -8,6 +8,16 @@ set(EXTRA_COMPONENT_DIRS
     ../../components
     )
 
+set(EXCLUDE_COMPONENTS
+    "lvgl__lvgl/examples" # If you only want to exclude LVGL examples
+)
+
+set(COMPONENT_EXCLUDE_PATTERNS 
+    "managed_components/*/examples/*"
+    "managed_components/*/test_apps/*"
+    "managed_components/*/test/*"
+)
+
 add_compile_options(-fdiagnostics-color=always
                     -Wno-ignored-qualifiers
                     -Wno-deprecated-declarations

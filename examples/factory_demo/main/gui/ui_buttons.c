@@ -22,6 +22,14 @@
 #include "ui_hint.h"
 #include "ui_volume.h"
 #include "ui_estop.h"
+// #include 
+
+LV_IMG_DECLARE(arrow_upper_right)
+LV_IMG_DECLARE(arrow_upper_left)
+LV_IMG_DECLARE(arrow_lower_right)
+LV_IMG_DECLARE(arrow_lower_left)
+LV_IMG_DECLARE(arrow_right)
+LV_IMG_DECLARE(arrow_left)
 
 static const char *TAG = "ui_buttons";
 
@@ -191,7 +199,7 @@ static void ui_main_menu(int32_t index_id)
     // On button
     btn = lv_btn_create(lv_scr_act());
     lv_obj_set_size(btn, 100, 100); 
-    lv_obj_align(btn, LV_ALIGN_CENTER, 0, -50);
+    lv_obj_align(btn, LV_ALIGN_CENTER, -15, -50);
     lv_obj_set_style_bg_color(btn, lv_color_make(0, 255, 0), LV_STATE_DEFAULT);
     lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"ON");
     // Create the label
@@ -205,7 +213,7 @@ static void ui_main_menu(int32_t index_id)
     // Off button
     btn = lv_btn_create(lv_scr_act());
     lv_obj_set_size(btn, 100, 100); 
-    lv_obj_align(btn, LV_ALIGN_CENTER, 0, 60);
+    lv_obj_align(btn, LV_ALIGN_CENTER, -15, 60);
     lv_obj_set_style_bg_color(btn, lv_color_make(255, 0, 0), LV_STATE_DEFAULT);
     lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"OFF");
     // Create the label
@@ -215,55 +223,67 @@ static void ui_main_menu(int32_t index_id)
     lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 
-    // These four buttons will be on the right and represent the up, down, left, and right arrows
-    // Up button
+    // These six buttons will be on the right
+    // They will represent the six target regions upper, middle, and lower left and right
+    // Upper Left button
     btn = lv_btn_create(lv_scr_act());
-    lv_obj_set_size(btn, 85, 30); // The button will just have the arrow
-    lv_obj_align(btn, LV_ALIGN_CENTER, 105, -85);
-    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"UP");
+    lv_obj_set_size(btn, 50, 50); // The button will just have the arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 70, -65);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"UPPER LEFT");
     // Create the label
-    label = lv_label_create(btn);
-    lv_label_set_text(label, LV_SYMBOL_UP);
-    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT); // Increased font size to 24
-    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Center the label in the button
+    lv_obj_t *img = lv_img_create(btn);  
+    lv_img_set_src(img, &arrow_upper_left);  
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0); 
 
-    // Down button
+    // Middle Left button
     btn = lv_btn_create(lv_scr_act());
-    lv_obj_set_size(btn, 85, 30); // The button will just have the arrow
-    lv_obj_align(btn, LV_ALIGN_CENTER, 105, 95);
-    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"DOWN");
+    lv_obj_set_size(btn, 50, 50); // The button will just have the arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 70, 5);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"MIDDLE LEFT");
     // Create the label
-    label = lv_label_create(btn);
-    lv_label_set_text(label, LV_SYMBOL_DOWN);
-    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT); // Increased font size to 24
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Center the label in the button
-    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
-
-    // Left button
+    img = lv_img_create(btn);  
+    lv_img_set_src(img, &arrow_left);  
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0); 
+    
+    // Lower Left button
     btn = lv_btn_create(lv_scr_act());
-    lv_obj_set_size(btn, 40, 140); // The button will just have the arrow
-    lv_obj_align(btn, LV_ALIGN_CENTER, 83, 5);
-    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"LEFT");
+    lv_obj_set_size(btn, 50, 50); // The button will just have the arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 70, 75);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"LOWER LEFT");
     // Create the label
-    label = lv_label_create(btn);
-    lv_label_set_text(label, LV_SYMBOL_LEFT);
-    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT); // Increased font size to 24
-    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Center the label in the button
+    img = lv_img_create(btn);  
+    lv_img_set_src(img, &arrow_lower_left);  
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0); 
 
-    // Right button
+    // Upper Right button
     btn = lv_btn_create(lv_scr_act());
-    lv_obj_set_size(btn, 40, 140); // The button will just have the arrow
-    lv_obj_align(btn, LV_ALIGN_CENTER, 127, 5);
-    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"RIGHT");
+    lv_obj_set_size(btn, 50, 50); // The button will just have the arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 125, -65);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"UPPER RIGHT");
     // Create the label
-    label = lv_label_create(btn);
-    lv_label_set_text(label, LV_SYMBOL_RIGHT);
-    lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT); // Increased font size to 24
-    lv_obj_set_style_text_color(label, lv_color_black(), LV_STATE_DEFAULT);
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0); // Center the label in the button
+    img = lv_img_create(btn);  
+    lv_img_set_src(img, &arrow_upper_right);  
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0); 
 
+    // Middle Right button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 50, 50); // The button will just have the arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 125, 5);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"MIDDLE RIGHT");
+    // Create the label
+    img = lv_img_create(btn);  
+    lv_img_set_src(img, &arrow_right);  
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0); 
+
+    // Lower Right button
+    btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 50, 50); // The button will just have the arrow
+    lv_obj_align(btn, LV_ALIGN_CENTER, 125, 75);
+    lv_obj_add_event_cb(btn, ui_button_event_cb, LV_EVENT_CLICKED, (void *)"LOWER RIGHT");
+    // Create the label
+    img = lv_img_create(btn);  
+    lv_img_set_src(img, &arrow_lower_right);  
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0); 
 }
 
 static void ui_after_boot(void)
