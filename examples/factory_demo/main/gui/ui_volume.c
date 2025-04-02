@@ -140,29 +140,3 @@ bool volume_active(void)
 {
     return g_vol_active;
 } 
-// // Sets the screen to red and displays a message if the volume is too loud
-// esp_err_t ui_volume(void)
-// {
-//     ui_acquire();
-
-//     // save the current screen
-//     lv_obj_t *prev = lv_scr_act();
-//     // clear the screen
-//     lv_obj_clean(lv_scr_act());
-//     // set the screen to red
-//     lv_obj_set_style_bg_color(lv_scr_act(), lv_color_make(200, 0, 0), LV_STATE_DEFAULT);
-//     // display the message
-//     lv_obj_t *label = lv_label_create(lv_scr_act());
-//     lv_label_set_text(label, "Volume too Loud!");
-//     lv_obj_set_style_text_font(label, &lv_font_montserrat_24, LV_STATE_DEFAULT);
-//     lv_obj_set_style_text_color(label, lv_color_make(255, 255, 255), LV_STATE_DEFAULT);
-//     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
-//     // wait for 1 second
-//     vTaskDelay(pdMS_TO_TICKS(1000));
-//     // clear the screen
-//     lv_obj_clean(lv_scr_act());
-//     // return the screen to normal and display the previous screen
-//     lv_scr_load(prev);
-//     ui_release();
-//     return ESP_OK;
-// }

@@ -30,7 +30,8 @@ extern "C" {
 #define SR_CMD_STR_LEN_MAX 64
 #define SR_CMD_PHONEME_LEN_MAX 64
 
-#define THRESHOLD 6800 // If the volume is greater than this threshold, we send a stop message
+// #define THRESHOLD 6800 // If the volume is greater than this threshold, we send a stop message
+#define THRESHOLD 5500 
 
 typedef struct {
     wakenet_state_t wakenet_mode;
