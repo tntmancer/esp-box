@@ -48,10 +48,12 @@ typedef enum {
     SR_CMD_ON,
     SR_CMD_HARDER,
     SR_CMD_SOFTER,
-    SR_CMD_UP,
-    SR_CMD_DOWN,
-    SR_CMD_LEFT,
-    SR_CMD_RIGHT,
+    SR_CMD_UPPER_LEFT,
+    SR_CMD_MIDDLE_LEFT,
+    SR_CMD_LOWER_LEFT,
+    SR_CMD_UPPER_RIGHT,
+    SR_CMD_MIDDLE_RIGHT,
+    SR_CMD_LOWER_RIGHT,
 } sr_user_cmd_t;
 
 typedef enum {

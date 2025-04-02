@@ -83,15 +83,17 @@ static const sr_cmd_t g_default_cmd_info[] = {
     {SR_CMD_OFF, SR_LANG_EN, 0, "Oof", "oF", {NULL}},
     {SR_CMD_OFF, SR_LANG_EN, 0, "Ow", "b", {NULL}},
     {SR_CMD_OFF, SR_LANG_EN, 0, "Stop", "STnP", {NULL}},
-    {SR_CMD_OFF, SR_LANG_EN, 0, "Hurt", "hkT", {NULL}},
+    // {SR_CMD_OFF, SR_LANG_EN, 0, "Hurt", "hkT", {NULL}},
     {SR_CMD_OFF, SR_LANG_EN, 0, "Damn", "DaM", {NULL}},
     {SR_CMD_OFF, SR_LANG_EN, 0, "Fuck", "FcK", {NULL}},
     {SR_CMD_HARDER, SR_LANG_EN, 0, "Harder", "hnRDk", {NULL}},
     {SR_CMD_SOFTER, SR_LANG_EN, 0, "Softer", "SnFTk", {NULL}},
-    {SR_CMD_UP, SR_LANG_EN, 0, "Up", "cP", {NULL}},
-    {SR_CMD_DOWN, SR_LANG_EN, 0, "Down", "DtN", {NULL}},
-    {SR_CMD_LEFT, SR_LANG_EN, 0, "Left", "LfFT", {NULL}},
-    {SR_CMD_RIGHT, SR_LANG_EN, 0, "Right", "RiT", {NULL}},
+    {SR_CMD_UPPER_LEFT, SR_LANG_EN, 0, "Upper Left", "cPk LfFT", {NULL}},
+    {SR_CMD_MIDDLE_LEFT, SR_LANG_EN, 0, "Middle Left", "MgDcL LfFT", {NULL}},
+    {SR_CMD_LOWER_LEFT, SR_LANG_EN, 0, "Lower Left", "Lbk LfFT", {NULL}},
+    {SR_CMD_UPPER_RIGHT, SR_LANG_EN, 0, "Upper Right", "cPk RiT", {NULL}},
+    {SR_CMD_MIDDLE_RIGHT, SR_LANG_EN, 0, "Middle Right", "MgDcL RiT", {NULL}},
+    {SR_CMD_LOWER_RIGHT, SR_LANG_EN, 0, "Lower Right", "Lbk RiT", {NULL}},
 };
 
 static void audio_feed_task(void *arg)

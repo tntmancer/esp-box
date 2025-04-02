@@ -229,17 +229,23 @@ void sr_handler_task(void *pvParam)
             case SR_CMD_SOFTER:
                 ESP_LOGI(TAG, "SOFTER");
                 break;
-            case SR_CMD_UP:
-                ESP_LOGI(TAG, "UP");
+            case SR_CMD_UPPER_LEFT:
+                ESP_LOGI(TAG, "UPPER LEFT");
                 break;
-            case SR_CMD_DOWN:
-                ESP_LOGI(TAG, "DOWN");
+            case SR_CMD_MIDDLE_LEFT:
+                ESP_LOGI(TAG, "MIDDLE LEFT");
                 break;
-            case SR_CMD_LEFT:
-                ESP_LOGI(TAG, "LEFT");
+            case SR_CMD_LOWER_LEFT:
+                ESP_LOGI(TAG, "LOWER LEFT");
                 break;
-            case SR_CMD_RIGHT:
-                ESP_LOGI(TAG, "RIGHT");
+            case SR_CMD_UPPER_RIGHT:
+                ESP_LOGI(TAG, "UPPER RIGHT");
+                break;
+            case SR_CMD_MIDDLE_RIGHT:
+                ESP_LOGI(TAG, "MIDDLE RIGHT");
+                break;
+            case SR_CMD_LOWER_RIGHT:
+                ESP_LOGI(TAG, "LOWER RIGHT");
                 break;
 
             default:
